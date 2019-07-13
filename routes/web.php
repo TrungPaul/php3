@@ -17,3 +17,4 @@ Route::get('/', function () {
  Route::get('/login', function () {
     return 'hello world';
 });
+ Route::get('hello','Hellocontroller@index');
