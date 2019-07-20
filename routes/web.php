@@ -17,8 +17,9 @@ Route::get('/', function () {
  Route::get('/login', function () {
     return 'hello world';
 });
- route::get('students','StudentController@index')->name('students');
+ route::get('students','studentController@index')->name('students');
 
 Route::get('input', 'SomeController@sumView')->name('sum-view');
 Route::post('sum', 'SomeController@tong')->name('sum');
+route::get('classes','ClassController@index')->name('classes');
 
