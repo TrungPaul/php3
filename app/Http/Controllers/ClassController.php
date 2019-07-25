@@ -9,5 +9,5 @@ class ClassController extends Controller
 {
     public function index(){
    	$classes = classRoom::all();
-   	return view('class', ['classes'=> $classes]);
+   	return view('admin.class', ['classes'=> $classes]);
    }}
