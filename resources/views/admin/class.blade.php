@@ -11,6 +11,7 @@
     <th>teacher_name</th>
     <th>major</th>
     <th>max student</th>
+    <th><a href="{{route('classes.add')}}" title=""><button type="button" class="btn btn-success ">Thêm</button></a></td></th>
         </tr>
   </thead>
   <!-- <tbody>
@@ -25,4 +26,6 @@
       </tr>
     @endforeach
   </tbody> -->
-  @include('
+  @include('admin.class_detail')
+</table>
+@endsection

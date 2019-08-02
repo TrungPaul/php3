@@ -21,13 +21,24 @@ Route::get('/', function () {
 
 Route::get('input', 'SomeController@sumView')->name('sum-view');
 Route::post('sum', 'SomeController@tong')->name('sum');
-route::get('classes','ClassController@index')->name('classes');
 Route::get('table', function () {
     return view('table');
 });
-Route::get('users', function () {
-    return view('user ');
-});
+
 Route::get('master', function () {
     return view('admin.master');
 });
+//class group
+Route::group(
+(['prefix' =>'classes', 'as'=> 'classes.']),
+	function() {
+		Route::get('/','ClassController@index')->name('list');
+		Route::get('add', 'ClassController@createform')->name('add');
+		Route::post('create-post', 'ClassController@create')->name('create');
+		Route::get('{class}/edit', 'ClassController@editform')->name('edit');
+		Route::post('update-post', 'ClassController@update')->name('update');
+		Route::get('{class}/remove','ClassController@remove')->name('remove');
+
+	}
+);
+
