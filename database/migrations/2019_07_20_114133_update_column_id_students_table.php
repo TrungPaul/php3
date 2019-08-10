@@ -15,6 +15,9 @@ class UpdateColumnIdStudentsTable extends Migration
     {
         Schema::table ('students', function(Blueprint $table){
                 $table->bigIncrements('id')->change();
+                $table->string('name');
+                $table->string('address');
+                $table->string('university'); 
                 $table->Integer('class_id');
         });
     }

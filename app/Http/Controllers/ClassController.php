@@ -5,14 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\classRoom;
 use App\Http\Requests\ClassRoomRequest;
+use App\Models\admin;
+
+
 
 class ClassController extends Controller
 {
     public function index(){
-   	$classes = classRoom::all();
-   	return view('admin.class', ['classes'=> $classes]);
+      $classes = classRoom::all();
+      // $class = classRoom::find(5);
+      // $admins = $class->admin()->get();
+   
+      $classes = $classes->load('admins');
+      // dd($classes->toArray());   
+      return view('admin.class', ['classes'=> $classes]);
    }
-
+      function __construct(){
+         $this->middleware(['auth', 'activeAdmin' , 'uAdmin']);
+      }
    public function createform(){
    	return view('admin.add_class');
    }
@@ -33,10 +43,10 @@ class ClassController extends Controller
    			// $classRoom->teacher_name = $data['teachername'];
    			// $classRoom->major = $data['major'];
    			// $classRoom->max_student = $data['maxstudent'];
-   			// $classRoom->save();
+            // $classRoom->save();
 
             // cách 2 
-            classRoom::create($data);
+            ClassRoom::create($data);
             //CÁCH 3 
             // $mutidata = [
             //       $data,
@@ -52,6 +62,8 @@ class ClassController extends Controller
       classRoom::destroy($class);
       return $this->index();
    }
+   //
+
     public function editform(classRoom $class){
      // dDAT TEN THAM SOS TRUFNG S THAM SỐ Ở ROUTE KÈM THEO CLASSROOM THÌ TRẢ VỀ LUÔN CLASSROOM CÓ ID MÀ K CẦN FIND
        return view('admin.add_class', ['class' => $class]);
@@ -61,7 +73,6 @@ class ClassController extends Controller
      {
          // láy ra dữ liệu cần update
       $data = $request->except('_token' , 'id');
-      
       // tìm ra dữ liệu có id truyền vào
        $classRoom = classRoom::find($request->id);
       // $classRoom = classRoom::where('id', "=" ,$request->id )->first();

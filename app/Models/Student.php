@@ -12,5 +12,8 @@ class Student extends Model
     	'address',
     	'university',
     	'class_id',
-    ];
+	];
+	public function classRoom() {
+		return $this->belongsTo('App\Models\Student');
+	}
 }

@@ -28,9 +28,22 @@ Route::get('table', function () {
 Route::get('master', function () {
     return view('admin.master');
 });
+Route::group((['prefix' => 'admins' ,'as'=> 'admins.']), function () {
+	Route::get('/','AdminController@index')->name('list');
+	Route::get('classes','AdminController@indexClass')->name('class');
+	Route::get('login', 'AdminController@getLogin')->name('getLogin');
+	Route::post('postLogin', 'AdminController@postLogin' )->name('postLogin');
+	Route::get('logout', 'AdminController@logout')->name('getLogout');
+	Route::get('register', 'AdminController@getRegister')->name('getRegister');
+	Route::post('postRegister', 'AdminController@postRegister' )->name('postRegister');
+});
 //class group
 Route::group(
-(['prefix' =>'classes', 'as'=> 'classes.']),
+(['prefix' =>'classes',
+ 'as'=> 'classes.',
+'middleware' => ['auth','activeAdmin'],
+
+ ]),
 	function() {
 		Route::get('/','ClassController@index')->name('list');
 		Route::get('add', 'ClassController@createform')->name('add');

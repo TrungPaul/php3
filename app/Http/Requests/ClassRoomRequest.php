@@ -44,11 +44,6 @@ class ClassRoomRequest extends FormRequest
                 'major.required' => 'Yêu cầu nhập tên',
                 'major.string' => 'Yêu cầu là chuối',
 
-
-
-
-
-
         ];
     }
 }
