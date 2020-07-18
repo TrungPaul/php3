@@ -1,0 +1,1 @@
+<div>kết quả tính tổng {{$ket_qua}}</div>

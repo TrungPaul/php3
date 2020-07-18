@@ -17,3 +17,28 @@ Route::get('/', function () {
  Route::get('/login', function () {
     return 'hello world';
 });
+ route::get('students','studentController@index')->name('students');
+
+Route::get('input', 'SomeController@sumView')->name('sum-view');
+Route::post('sum', 'SomeController@tong')->name('sum');
+Route::get('table', function () {
+    return view('table');
+});
+
+Route::get('master', function () {
+    return view('admin.master');
+});
+//class group
+Route::group(
+(['prefix' =>'classes', 'as'=> 'classes.']),
+	function() {
+		Route::get('/','ClassController@index')->name('list');
+		Route::get('add', 'ClassController@createform')->name('add');
+		Route::post('create-post', 'ClassController@create')->name('create');
+		Route::get('{class}/edit', 'ClassController@editform')->name('edit');
+		Route::post('update-post', 'ClassController@update')->name('update');
+		Route::get('{class}/remove','ClassController@remove')->name('remove');
+
+	}
+);
+
